@@ -167,7 +167,6 @@ setMethod("dbAppendTable", "OdbcConnection",
         if (batch_rows == 0) {
           batch_rows <- 1
         }
-        batch_rows <- min(1024, batch_rows)
       }
       batch_rows <- parse_size(batch_rows)
       tryCatch(

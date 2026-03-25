@@ -44,7 +44,10 @@ VPATH = $(SRC)src:$(SRC)examples
 # package::odbc
 # Preserve include flags and PIC flags when src/Makevars invokes
 # this Makefile with command-line CXXFLAGS during R package builds.
-CPPFLAGS += -I$(SRC)include
+# package:odbc
+# Build vendored cctz in release mode so assert() does not surface in
+# CRAN's compiled-code checks for termination-prone entry points.
+CPPFLAGS += -DNDEBUG -I$(SRC)include
 override CXXFLAGS += -g -Wall -std=$(STD) $(TEST_FLAGS) $(CXXPICFLAGS) -MMD
 ARFLAGS = rcs
 LINK.o = $(LINK.cc)

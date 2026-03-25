@@ -58,6 +58,8 @@
 <li>
 <code>src/cctz/Makefile</code> adds <code>time_zone_name_win.o</code> on Windows because upstream now ships <code>src/time_zone_name_win.cc</code>, and omitting it breaks Windows linking.</li>
 <li>
+<code>src/cctz/Makefile</code> add <code>-DNDEBUG</code> to <code>CPPFLAGS</code>.</li>
+<li>
 <code>src/cctz/src/time_zone_fixed.cc</code> keeps odbc-specific fixed-offset zone names based on <code>Etc/GMT</code> rather than upstream <code>Fixed/UTC</code>, matching odbc timestamp offset behavior.</li>
 <li>
 <code>src/cctz/src/time_zone_fixed.cc</code> also retains local formatting behavior for fixed offsets, including compact hour formatting, omission of zero minute/second components, and a runtime error in place of the upstream assert.</li>

@@ -33,6 +33,7 @@ the following deltas for R package inclusion:
 - `src/cctz/Makefile` adds `time_zone_name_win.o` on Windows because
   upstream now ships `src/time_zone_name_win.cc`, and omitting it breaks
   Windows linking.
+- `src/cctz/Makefile` add `-DNDEBUG` to `CPPFLAGS`.
 - `src/cctz/src/time_zone_fixed.cc` keeps odbc-specific fixed-offset
   zone names based on `Etc/GMT` rather than upstream `Fixed/UTC`,
   matching odbc timestamp offset behavior.

@@ -15,9 +15,9 @@
 #include "time_zone_fixed.h"
 
 #include <algorithm>
-#include <cassert>
 #include <chrono>
 #include <cstring>
+#include <stdexcept>
 #include <string>
 
 namespace cctz {

@@ -41,6 +41,9 @@ DESTDIR ?=
 ## TEST_LIBS = ...
 
 VPATH = $(SRC)src:$(SRC)examples
+# package::odbc
+# Preserve include flags and PIC flags when src/Makevars invokes
+# this Makefile with command-line CXXFLAGS during R package builds.
 CPPFLAGS += -I$(SRC)include
 override CXXFLAGS += -g -Wall -std=$(STD) $(TEST_FLAGS) $(CXXPICFLAGS) -MMD
 ARFLAGS = rcs
@@ -68,6 +71,7 @@ CCTZ_OBJS =			\
 	zone_info_source.o
 
 ifeq ($(OS),Windows_NT)
+# package:odbc Include the upstream Windows source added after prior vendoring.
 CCTZ_OBJS += time_zone_name_win.o
 endif
 

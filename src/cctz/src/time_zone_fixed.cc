@@ -25,7 +25,8 @@ namespace cctz {
 namespace {
 
 // The prefix used for the internal names of fixed-offset zones.
-// package:odbc changed from "Fixed/UTC"
+// package::odbc
+// changed from "Fixed/UTC"
 const char kFixedZonePrefix[] = "Etc/GMT";
 
 const char kDigits[] = "0123456789";

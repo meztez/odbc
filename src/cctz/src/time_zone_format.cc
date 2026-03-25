@@ -12,7 +12,7 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-#  define HAS_STRPTIME 1  // assume everyone has strptime()
+#  define HAS_STRPTIME 1  // package::odbc assume everyone has strptime()
 #if !defined(HAS_STRPTIME)
 # if defined(_MSC_VER) || defined(__MINGW32__) || defined(__VXWORKS__)
 #  define HAS_STRPTIME 0
@@ -119,6 +119,8 @@ std::tm ToTM(const time_zone::absolute_lookup& al) {
   if (al.cs.year() < std::numeric_limits<int>::min() + 1900) {
     tm.tm_year = std::numeric_limits<int>::min();
   //} else if (al.cs.year() - 1900 > std::numeric_limits<int>::max()) {
+    // package::odbc
+    // preserve historical behavior and avoid saturating here.
     //tm.tm_year = std::numeric_limits<int>::max();
   } else {
     tm.tm_year = static_cast<int>(al.cs.year() - 1900);
@@ -649,7 +651,8 @@ const char* ParseSubSeconds(const char* dp, detail::femtoseconds* subseconds) {
 // Parses a string into a std::tm using strptime(3).
 const char* ParseTM(const char* dp, const char* fmt, std::tm* tm) {
   if (dp != nullptr) {
-    // We are not parsing from strings, so don't need this
+    // package::odbc
+    // We are not parsing from strings, so don't need this.
     //dp = strptime(dp, fmt, tm);
   }
   return dp;

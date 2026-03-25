@@ -41,8 +41,8 @@ DESTDIR ?=
 ## TEST_LIBS = ...
 
 VPATH = $(SRC)src:$(SRC)examples
-CXXFLAGS += -g -Wall -I$(SRC)include -std=$(STD) \
-            $(TEST_FLAGS) -fPIC -MMD
+CPPFLAGS += -I$(SRC)include
+override CXXFLAGS += -g -Wall -std=$(STD) $(TEST_FLAGS) $(CXXPICFLAGS) -MMD
 ARFLAGS = rcs
 LINK.o = $(LINK.cc)
 LDLIBS += $(TEST_LIBS)
@@ -66,6 +66,10 @@ CCTZ_OBJS =			\
 	time_zone_lookup.o	\
 	time_zone_posix.o       \
 	zone_info_source.o
+
+ifeq ($(OS),Windows_NT)
+CCTZ_OBJS += time_zone_name_win.o
+endif
 
 TOOLS = time_tool
 EXAMPLES = classic epoch_shift hello example1 example2 example3 example4

@@ -58,6 +58,8 @@
 <li>
 <code>src/cctz/Makefile</code> adds <code>time_zone_name_win.o</code> on Windows because upstream now ships <code>src/time_zone_name_win.cc</code>, and omitting it breaks Windows linking.</li>
 <li>
+<code>src/cctz/Makefile</code> sets <code>_WIN32_WINNT</code>/<code>WINVER</code> to <code>0x0601</code> on Windows. <code>src/time_zone_name_win.cc</code> uses <code>WC_ERR_INVALID_CHARS</code> and <code>GetDynamicTimeZoneInformation</code>, which the mingw-w64 headers declare only at API level <code>0x0600</code>+. Rtools40 (R 4.1) defaults to <code>0x502</code>, so without this the file does not compile there.</li>
+<li>
 <code>src/cctz/Makefile</code> add <code>-DNDEBUG</code> to <code>CPPFLAGS</code>.</li>
 <li>
 <code>src/cctz/src/time_zone_fixed.cc</code> keeps odbc-specific fixed-offset zone names based on <code>Etc/GMT</code> rather than upstream <code>Fixed/UTC</code>, matching odbc timestamp offset behavior.</li>
